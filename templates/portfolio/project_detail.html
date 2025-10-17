@@ -1,0 +1,224 @@
+{% extends 'portfolio/base.html' %}
+{% load portfolio_extras %}
+
+{% block title %}{{ project.title }} - Portfolio de Gonzalo{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="project-detail">
+                    <!-- Imagen del proyecto -->
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" 
+                             class="img-fluid rounded shadow-lg mb-4">
+                    {% else %}
+                        <div class="project-placeholder bg-gradient d-flex align-items-center justify-content-center rounded shadow-lg mb-4" 
+                             style="height: 400px; background: linear-gradient(45deg, #667eea, #764ba2);">
+                            <i class="fas fa-code text-white fa-5x"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Información del proyecto -->
+                    <div class="project-info">
+                        <h1 class="display-5 fw-bold mb-3">{{ project.title }}</h1>
+                        
+                        <div class="project-meta mb-4">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <small class="text-muted">
+                                        <i class="fas fa-calendar-alt"></i> 
+                                        Fecha: {{ project.date_created|date:"d M Y" }}
+                                    </small>
+                                </div>
+                                {% if project.featured %}
+                                <div class="col-md-6 mb-2">
+                                    <span class="badge bg-warning text-dark">
+                                        <i class="fas fa-star"></i> Proyecto Destacado
+                                    </span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Descripción -->
+                        <div class="project-description mb-4">
+                            <h3>Descripción del Proyecto</h3>
+                            <p class="lead">{{ project.description|linebreaks }}</p>
+                        </div>
+                        
+                        <!-- Tecnologías utilizadas -->
+                        <div class="project-technologies mb-4">
+                            <h3>Tecnologías Utilizadas</h3>
+                            <div class="technologies-list">
+                                {% for tech in project.technologies|split:"," %}
+                                    <span class="badge bg-primary me-2 mb-2 fs-6">{{ tech|strip }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <!-- Enlaces del proyecto -->
+                        <div class="project-links mb-5">
+                            <h3>Enlaces</h3>
+                            <div class="d-flex flex-wrap gap-3">
+                                {% if project.url %}
+                                    <a href="{{ project.url }}" target="_blank" class="btn btn-primary">
+                                        <i class="fas fa-external-link-alt"></i> Ver Demo en Vivo
+                                    </a>
+                                {% endif %}
+                                {% if project.github_url %}
+                                    <a href="{{ project.github_url }}" target="_blank" class="btn btn-dark">
+                                        <i class="fab fa-github"></i> Ver Código Fuente
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="project-sidebar">
+                    <!-- Detalles del proyecto -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-info-circle"></i> Detalles del Proyecto
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-5">Cliente:</dt>
+                                <dd class="col-7">Proyecto Personal</dd>
+                                
+                                <dt class="col-5">Duración:</dt>
+                                <dd class="col-7">2-4 semanas</dd>
+                                
+                                <dt class="col-5">Categoría:</dt>
+                                <dd class="col-7">Desarrollo Web</dd>
+                                
+                                <dt class="col-5">Estado:</dt>
+                                <dd class="col-7">
+                                    <span class="badge bg-success">Completado</span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    
+                    <!-- Contacto -->
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-handshake"></i> ¿Te interesa?
+                            </h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <p>¿Tienes un proyecto similar en mente?</p>
+                            <a href="{% url 'portfolio:contact' %}" class="btn btn-success">
+                                <i class="fas fa-envelope"></i> Contactar a Gonzalo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Proyectos relacionados -->
+{% if related_projects %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-6 fw-bold">Otros Proyectos</h2>
+                <p class="lead text-muted">Te pueden interesar estos otros trabajos</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for related_project in related_projects %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {% if related_project.image %}
+                        <img src="{{ related_project.image.url }}" class="card-img-top" 
+                             alt="{{ related_project.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-gradient d-flex align-items-center justify-content-center" 
+                             style="height: 200px; background: linear-gradient(45deg, #667eea, #764ba2);">
+                            <i class="fas fa-code text-white fa-3x"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ related_project.title }}</h5>
+                        <p class="card-text">{{ related_project.description|truncatewords:15 }}</p>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent">
+                        <a href="{% url 'portfolio:project_detail' related_project.id %}" 
+                           class="btn btn-primary btn-sm">Ver Proyecto</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Navegación -->
+<section class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="Navegación de proyectos">
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'portfolio:projects' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left"></i> Volver a Proyectos
+                        </a>
+                        <a href="{% url 'portfolio:contact' %}" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i> Contactar
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.project-detail img {
+    transition: transform 0.3s ease;
+}
+
+.project-detail:hover img {
+    transform: scale(1.02);
+}
+
+.technologies-list .badge {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.project-sidebar .card {
+    transition: transform 0.3s ease;
+}
+
+.project-sidebar .card:hover {
+    transform: translateY(-2px);
+}
+
+.project-placeholder {
+    transition: all 0.3s ease;
+}
+
+.project-placeholder:hover {
+    transform: scale(1.02);
+}
+</style>
+{% endblock %}

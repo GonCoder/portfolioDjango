@@ -1,0 +1,140 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Testimonios - Portfolio Profesional{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h1 class="display-4 fw-bold">Testimonios</h1>
+                <p class="lead text-muted">Lo que dicen mis clientes sobre mi trabajo</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for testimonial in testimonials %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="testimonial-card card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        {% if testimonial.image %}
+                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" 
+                                 class="testimonial-avatar rounded-circle mb-3" 
+                                 style="width: 100px; height: 100px; object-fit: cover;">
+                        {% else %}
+                            <div class="testimonial-avatar-placeholder bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 100px; height: 100px;">
+                                <i class="fas fa-user fa-2x"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <blockquote class="blockquote">
+                            <p class="mb-0">"{{ testimonial.content }}"</p>
+                        </blockquote>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent text-center">
+                        <footer class="blockquote-footer mb-0">
+                            <strong>{{ testimonial.name }}</strong><br>
+                            <small class="text-muted">{{ testimonial.position }} en {{ testimonial.company }}</small>
+                        </footer>
+                        <div class="stars mt-2">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-comments fa-5x text-muted mb-4"></i>
+                    <h3>Sé el primero en dejar un testimonio</h3>
+                    <p class="text-muted">Los testimonios de clientes aparecerán aquí.</p>
+                    <a href="{% url 'portfolio:contact' %}" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Trabajar Conmigo
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Paginación -->
+        {% if testimonials.has_other_pages %}
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="Navegación de testimonios" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if testimonials.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ testimonials.previous_page_number }}">Anterior</a>
+                            </li>
+                        {% endif %}
+                        
+                        <li class="page-item active">
+                            <span class="page-link">{{ testimonials.number }} de {{ testimonials.paginator.num_pages }}</span>
+                        </li>
+                        
+                        {% if testimonials.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ testimonials.next_page_number }}">Siguiente</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-6 fw-bold mb-4">¿Quieres ser el próximo?</h2>
+                <p class="lead mb-4">
+                    Únete a la lista de clientes satisfechos que han confiado en mi experiencia
+                    para llevar sus proyectos al siguiente nivel.
+                </p>
+                <a href="{% url 'portfolio:contact' %}" class="btn btn-warning btn-lg">
+                    <i class="fas fa-handshake"></i> Trabajemos Juntos
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.testimonial-card {
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-left-color: var(--accent-color);
+}
+
+.testimonial-avatar,
+.testimonial-avatar-placeholder {
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover .testimonial-avatar,
+.testimonial-card:hover .testimonial-avatar-placeholder {
+    transform: scale(1.1);
+}
+
+.stars i {
+    margin: 0 2px;
+}
+</style>
+{% endblock %}

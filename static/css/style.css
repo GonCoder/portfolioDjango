@@ -1,0 +1,582 @@
+/* Estilos principales para Portfolio Django */
+
+/* Variables CSS */
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #ffc107;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+    --text-color: #495057;
+    --border-color: #dee2e6;
+    --muted-color: #6c757d; /* Better contrast muted color */
+    --muted-light: #adb5bd;  /* For dark backgrounds */
+    --muted-dark: #495057;   /* For light backgrounds */
+}
+
+/* Tipografía */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: #212529 !important; /* Asegurar contraste máximo */
+}
+
+/* Títulos en fondos oscuros */
+.bg-dark h1, .bg-dark h2, .bg-dark h3, .bg-dark h4, .bg-dark h5, .bg-dark h6,
+.bg-primary h1, .bg-primary h2, .bg-primary h3, .bg-primary h4, .bg-primary h5, .bg-primary h6,
+.hero-section h1, .hero-section h2, .hero-section h3, .hero-section h4, .hero-section h5, .hero-section h6,
+footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
+    color: #ffffff !important;
+}
+
+/* Clases display específicas para mayor contraste */
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+    color: #212529 !important;
+    font-weight: 700 !important;
+}
+
+/* Display en fondos oscuros */
+.bg-dark .display-1, .bg-dark .display-2, .bg-dark .display-3, .bg-dark .display-4, .bg-dark .display-5, .bg-dark .display-6,
+.bg-primary .display-1, .bg-primary .display-2, .bg-primary .display-3, .bg-primary .display-4, .bg-primary .display-5, .bg-primary .display-6,
+.hero-section .display-1, .hero-section .display-2, .hero-section .display-3, .hero-section .display-4, .hero-section .display-5, .hero-section .display-6 {
+    color: #ffffff !important;
+}
+
+/* Navegación */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    margin: 0 0.2rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Typing animation fix */
+.typing-text {
+    display: inline-block;
+    min-width: 200px; /* Ancho fijo para evitar saltos */
+    text-align: left;
+}
+
+/* Hero buttons fix */
+.hero-buttons {
+    position: relative;
+    z-index: 10;
+}
+
+.hero-buttons .btn {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="1000,100 1000,0 0,100"/></svg>');
+    background-size: cover;
+    background-position: bottom;
+}
+
+/* Botones */
+.btn {
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-warning {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--dark-color);
+}
+
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Progress bars */
+.progress {
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+/* Secciones */
+section {
+    padding: 4rem 0;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Utilidades */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+}
+
+/* Forms */
+.form-control {
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Social Links */
+.social-links a {
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+/* Timeline (para about page) */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25px;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 60px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 16px;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+.timeline-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Project Cards */
+.project-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.project-card:hover::before {
+    left: 100%;
+}
+
+/* Testimonials */
+.testimonial-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Footer */
+footer {
+    background: var(--dark-color) !important;
+}
+
+footer a {
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 80vh !important;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .timeline::before {
+        left: 15px;
+    }
+    
+    .timeline-marker {
+        left: 6px;
+    }
+    
+    .timeline-item {
+        padding-left: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    section {
+        padding: 2rem 0;
+    }
+    
+    .hero-buttons .btn {
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+    
+    .typing-text {
+        min-width: 150px; /* Reducir ancho en móviles */
+    }
+    
+    .display-4 {
+        font-size: 1.8rem; /* Reducir tamaño de fuente en móviles */
+    }
+}
+
+/* Dark mode support (opcional) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #e9ecef;
+        --dark-color: #f8f9fa;
+        --light-color: #212529;
+        --border-color: #495057;
+    }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Overlay para modales */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+}
+
+/* Loading spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Contrast fixes for accessibility */
+.text-muted {
+    color: var(--muted-color) !important; /* Darker gray for better contrast */
+}
+
+/* Ensure good contrast on light backgrounds */
+.bg-light .text-muted,
+.card .text-muted,
+.bg-white .text-muted,
+.container .text-muted,
+section .text-muted {
+    color: var(--muted-dark) !important; /* Even darker for light backgrounds */
+}
+
+/* Dark backgrounds need lighter muted text */
+.bg-dark .text-muted,
+.bg-primary .text-muted,
+.bg-secondary .text-muted,
+footer .text-muted,
+.hero-section .text-muted {
+    color: var(--muted-light) !important; /* Light gray for dark backgrounds */
+}
+
+/* Paragraphs on dark backgrounds */
+.bg-dark p,
+.bg-primary p,
+.bg-secondary p,
+footer p,
+.hero-section p {
+    color: #ffffff !important;
+}
+
+/* Link contrast improvements */
+.text-muted a {
+    color: var(--muted-dark) !important;
+    text-decoration: underline;
+}
+
+.text-muted a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Dark background link improvements */
+.bg-dark .text-muted a,
+.bg-primary .text-muted a,
+.bg-secondary .text-muted a,
+footer .text-muted a,
+.hero-section .text-muted a {
+    color: var(--muted-light) !important;
+    text-decoration: underline;
+}
+
+.bg-dark .text-muted a:hover,
+.bg-primary .text-muted a:hover,
+.bg-secondary .text-muted a:hover,
+footer .text-muted a:hover,
+.hero-section .text-muted a:hover {
+    color: #ffffff !important;
+}
+
+/* Additional contrast improvements */
+.lead.text-muted {
+    color: var(--muted-dark) !important;
+    font-weight: 500; /* Slightly bolder for better readability */
+}
+
+/* Card subtitle improvements */
+.card-subtitle.text-muted {
+    color: var(--muted-dark) !important;
+    font-size: 0.9rem;
+}
+
+/* Small text improvements */
+small.text-muted {
+    color: var(--muted-dark) !important;
+    font-weight: 500;
+}
+
+/* Timeline and other specific elements */
+.timeline .text-muted,
+.step-process .text-muted {
+    color: var(--muted-dark) !important;
+}
+
+/* Card titles and headings contrast */
+.card-title {
+    color: #212529 !important;
+    font-weight: 600 !important;
+}
+
+.card-header h1, .card-header h2, .card-header h3, .card-header h4, .card-header h5, .card-header h6 {
+    color: inherit !important;
+}
+
+/* Section headings in containers */
+.container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
+    color: #212529 !important;
+}
+
+/* Paragraph text contrast fixes */
+.container p,
+.card-body p,
+section p {
+    color: #212529 !important;
+}
+
+/* Specific content sections */
+.col-lg-8 p,
+.about-section p,
+.content-section p {
+    color: #212529 !important;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* Ensure all text has proper contrast */
+p, span, div, li {
+    color: inherit;
+}
+
+/* Force dark text on light backgrounds */
+.bg-white p, .bg-light p, 
+.container p:not(.text-white):not(.text-muted),
+.row p:not(.text-white):not(.text-muted) {
+    color: #212529 !important;
+}
+
+/* Warning background contrast fix */
+.bg-warning .text-white {
+    color: var(--dark-color) !important; /* Dark text on yellow/warning background */
+}
+
+/* Ensure proper contrast for warning elements */
+.bg-warning {
+    color: var(--dark-color) !important;
+}
+
+/* Button contrast improvements */
+.btn-warning {
+    color: var(--dark-color) !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active {
+    color: var(--dark-color) !important;
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .btn,
+    footer {
+        display: none !important;
+    }
+    
+    * {
+        color: black !important;
+        background: white !important;
+    }
+}

@@ -1,0 +1,321 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Servicios - Portfolio Profesional{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h1 class="display-4 fw-bold">Mis Servicios</h1>
+                <div class="alert alert-warning d-inline-block" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Temporalmente fuera de servicio</strong>
+                </div>
+                <p class="lead text-muted mt-3">Actualmente no estoy aceptando nuevos proyectos. Volveré pronto con nuevas oportunidades.</p>
+            </div>
+        </div>
+        
+        <!-- Mensaje de servicios desactivados -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body text-center py-5">
+                        <div class="mb-4">
+                            <i class="fas fa-tools fa-5x text-muted opacity-50"></i>
+                        </div>
+                        <h3 class="fw-bold mb-4">Servicios Temporalmente Suspendidos</h3>
+                        <p class="lead text-muted mb-4">
+                            Actualmente me encuentro enfocado en proyectos personales y mejorando mis habilidades técnicas. 
+                            No estoy aceptando nuevos clientes en este momento.
+                        </p>
+                        <div class="row text-center mt-5">
+                            <div class="col-md-4 mb-3">
+                                <i class="fas fa-graduation-cap fa-2x text-primary mb-2"></i>
+                                <h6>Aprendizaje Continuo</h6>
+                                <small class="text-muted">Perfeccionando habilidades</small>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <i class="fas fa-code-branch fa-2x text-success mb-2"></i>
+                                <h6>Proyectos Personales</h6>
+                                <small class="text-muted">Desarrollo de portfolio</small>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <i class="fas fa-calendar-alt fa-2x text-warning mb-2"></i>
+                                <h6>Próximamente</h6>
+                                <small class="text-muted">Volveré pronto</small>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-muted mb-4">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Mientras tanto, puedes explorar mis proyectos actuales y mantenerte en contacto.
+                            </p>
+                            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                                <a href="{% url 'portfolio:projects' %}" class="btn btn-primary">
+                                    <i class="fas fa-folder-open me-1"></i> Ver Proyectos
+                                </a>
+                                <a href="{% url 'portfolio:about' %}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-user me-1"></i> Conocer Más
+                                </a>
+                                <a href="{% url 'portfolio:contact' %}" class="btn btn-outline-primary">
+                                    <i class="fas fa-envelope me-1"></i> Contactar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Servicios anteriores (comentados para referencia futura) -->
+        <!--
+        <div class="row">
+            {% for service in services %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm service-card">
+                    <div class="card-body text-center">
+                        <div class="service-icon mb-4">
+                            <i class="{{ service.icon }} fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">{{ service.title }}</h4>
+                        <p class="card-text">{{ service.description }}</p>
+                        {% if service.price_from %}
+                            <div class="price-tag">
+                                <span class="h5 text-primary fw-bold">Desde ${{ service.price_from }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer bg-transparent text-center">
+                        <a href="{% url 'portfolio:contact' %}" class="btn btn-primary disabled">Temporalmente No Disponible</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Servicios por defecto comentados temporalmente
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm service-card">
+                    <div class="card-body text-center">
+                        <div class="service-icon mb-4">
+                            <i class="fas fa-code fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">Desarrollo Web</h4>
+                        <p class="card-text">Desarrollo de aplicaciones web modernas y responsivas utilizando las últimas tecnologías como Django y JavaScript.</p>
+                        <div class="price-tag">
+                            <span class="h5 text-primary fw-bold">Desde $500</span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent text-center">
+                        <a href="{% url 'portfolio:contact' %}" class="btn btn-primary disabled">Temporalmente No Disponible</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm service-card opacity-50">
+                    <div class="card-body text-center">
+                        <div class="service-icon mb-4">
+                            <i class="fas fa-mobile-alt fa-3x text-muted"></i>
+                        </div>
+                        <h4 class="card-title text-muted">Desarrollo Mobile</h4>
+                        <p class="card-text text-muted">Aplicaciones móviles nativas y híbridas para iOS y Android que ofrecen una experiencia de usuario excepcional.</p>
+                        <div class="price-tag bg-light">
+                            <span class="h5 text-muted">Temporalmente No Disponible</span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent text-center">
+                        <button class="btn btn-secondary disabled">No Disponible</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm service-card opacity-50">
+                    <div class="card-body text-center">
+                        <div class="service-icon mb-4">
+                            <i class="fas fa-database fa-3x text-muted"></i>
+                        </div>
+                        <h4 class="card-title text-muted">APIs & Backend</h4>
+                        <p class="card-text text-muted">Desarrollo de APIs REST robustas y escalables, integración de sistemas y arquitectura de backend eficiente.</p>
+                        <div class="price-tag bg-light">
+                            <span class="h5 text-muted">Temporalmente No Disponible</span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent text-center">
+                        <button class="btn btn-secondary disabled">No Disponible</button>
+                    </div>
+                </div>
+            </div>
+            -->
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Proceso de Trabajo (Temporalmente Comentado) -->
+<!--
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">Mi Proceso de Trabajo</h2>
+                <p class="lead text-muted">Así es como trabajo contigo para llevar tu proyecto al éxito</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 60px; height: 60px;">
+                        <span class="fw-bold">1</span>
+                    </div>
+                    <h5>Consulta Inicial</h5>
+                    <p class="text-muted">Discutimos tus necesidades, objetivos y requerimientos del proyecto.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 60px; height: 60px;">
+                        <span class="fw-bold">2</span>
+                    </div>
+                    <h5>Propuesta & Planificación</h5>
+                    <p class="text-muted">Creo una propuesta detallada con cronograma y presupuesto personalizado.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 60px; height: 60px;">
+                        <span class="fw-bold">3</span>
+                    </div>
+                    <h5>Desarrollo</h5>
+                    <p class="text-muted">Desarrollo el proyecto con actualizaciones regulares y revisiones continuas.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="process-step text-center">
+                    <div class="step-number bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 60px; height: 60px;">
+                        <span class="fw-bold">4</span>
+                    </div>
+                    <h5>Entrega & Soporte</h5>
+                    <p class="text-muted">Entrego el proyecto finalizado con documentación y soporte post-lanzamiento.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+-->
+
+<!-- FAQ de Servicios (Temporalmente Comentado) -->
+<!--
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">Preguntas Frecuentes</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="servicesAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq1" aria-expanded="true">
+                                ¿Cuánto tiempo toma desarrollar un proyecto?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                El tiempo depende de la complejidad del proyecto. Un sitio web simple puede tomar 2-4 semanas, 
+                                mientras que una aplicación compleja puede requerir 2-6 meses. Siempre proporciono un cronograma detallado.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq2">
+                                ¿Qué incluye el precio?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                Los precios incluyen desarrollo completo, pruebas, documentación básica y soporte durante el lanzamiento. 
+                                Hosting, dominios y integraciones de terceros pueden tener costos adicionales.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq3">
+                                ¿Ofreces garantía?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                Sí, ofrezco 30 días de garantía para corrección de bugs y 90 días de soporte técnico gratuito 
+                                después de la entrega del proyecto.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+-->
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.service-card {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.service-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-10px);
+}
+
+.service-icon i {
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon i {
+    transform: scale(1.1);
+}
+
+.price-tag {
+    padding: 10px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.process-step {
+    padding: 20px;
+}
+
+.step-number {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.process-step:hover .step-number {
+    transform: scale(1.1);
+}
+</style>
+{% endblock %}

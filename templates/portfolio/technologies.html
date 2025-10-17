@@ -1,0 +1,416 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Tecnologías - Portfolio Profesional{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h1 class="display-4 fw-bold">Tecnologías & Herramientas</h1>
+                <p class="lead text-muted">Mi stack tecnológico actual como junior developer con 1 año de experiencia</p>
+            </div>
+        </div>
+        
+        {% for category, skills in skills_by_category.items %}
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="category-section">
+                    <h2 class="text-center mb-4">
+                        {% if category == 'programming' %}
+                            <i class="fas fa-code text-primary"></i> Lenguajes de Programación
+                        {% elif category == 'framework' %}
+                            <i class="fas fa-layer-group text-success"></i> Frameworks & Librerías
+                        {% elif category == 'database' %}
+                            <i class="fas fa-database text-info"></i> Bases de Datos
+                        {% elif category == 'tool' %}
+                            <i class="fas fa-tools text-warning"></i> Herramientas & DevOps
+                        {% else %}
+                            <i class="fas fa-cogs text-secondary"></i> Otros
+                        {% endif %}
+                    </h2>
+                    
+                    <div class="row">
+                        {% for skill in skills %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="tech-card card h-100 shadow-sm">
+                                <div class="card-body text-center">
+                                    {% if skill.logo %}
+                                        <img src="{{ skill.logo.url }}" alt="{{ skill.name }}" 
+                                             class="tech-logo mb-3" style="height: 60px; object-fit: contain;">
+                                    {% else %}
+                                        <div class="tech-icon mb-3">
+                                            {% if category == 'programming' %}
+                                                <i class="fas fa-code fa-3x text-primary"></i>
+                                            {% elif category == 'framework' %}
+                                                <i class="fas fa-layer-group fa-3x text-success"></i>
+                                            {% elif category == 'database' %}
+                                                <i class="fas fa-database fa-3x text-info"></i>
+                                            {% elif category == 'tool' %}
+                                                <i class="fas fa-tools fa-3x text-warning"></i>
+                                            {% else %}
+                                                <i class="fas fa-cog fa-3x text-secondary"></i>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    
+                                    <h5 class="card-title">{{ skill.name }}</h5>
+                                    <p class="text-muted small mb-3">{{ skill.get_category_display }}</p>
+                                    
+                                    <div class="progress mb-2" style="height: 10px;">
+                                        <div class="progress-bar 
+                                            {% if category == 'programming' %}bg-primary
+                                            {% elif category == 'framework' %}bg-success
+                                            {% elif category == 'database' %}bg-info
+                                            {% elif category == 'tool' %}bg-warning
+                                            {% else %}bg-secondary{% endif %}" 
+                                             role="progressbar" 
+                                             style="width: {{ skill.proficiency }}%" 
+                                             aria-valuenow="{{ skill.proficiency }}" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                    <small class="text-muted">{{ skill.proficiency }}% de dominio</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <!-- Si no hay habilidades en la base de datos, mostrar algunas por defecto -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="text-center mb-4">
+                    <i class="fas fa-code text-primary"></i> Lenguajes de Programación
+                </h2>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fab fa-html5 fa-3x text-danger"></i>
+                                </div>
+                                <h5>HTML5</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-danger" style="width: 85%"></div>
+                                </div>
+                                <small class="text-muted">85% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fab fa-css3-alt fa-3x text-info"></i>
+                                </div>
+                                <h5>CSS3</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-info" style="width: 80%"></div>
+                                </div>
+                                <small class="text-muted">80% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fab fa-js-square fa-3x text-warning"></i>
+                                </div>
+                                <h5>JavaScript</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" style="width: 75%"></div>
+                                </div>
+                                <small class="text-muted">75% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fas fa-hashtag fa-3x text-success"></i>
+                                </div>
+                                <h5>C#</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" style="width: 63%"></div>
+                                </div>
+                                <small class="text-muted">63% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fab fa-java fa-3x text-danger"></i>
+                                </div>
+                                <h5>Java</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-danger" style="width: 68%"></div>
+                                </div>
+                                <small class="text-muted">68% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fab fa-php fa-3x text-primary"></i>
+                                </div>
+                                <h5>PHP</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-primary" style="width: 65%"></div>
+                                </div>
+                                <small class="text-muted">65% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="text-center mb-4">
+                    <i class="fas fa-database text-info"></i> Bases de Datos
+                </h2>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fas fa-database fa-3x text-primary"></i>
+                                </div>
+                                <h5>SQL</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-primary" style="width: 40%"></div>
+                                </div>
+                                <small class="text-muted">40% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fas fa-leaf fa-3x text-success"></i>
+                                </div>
+                                <h5>MongoDB</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" style="width: 35%"></div>
+                                </div>
+                                <small class="text-muted">35% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fas fa-server fa-3x text-warning"></i>
+                                </div>
+                                <h5>MariaDB</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" style="width: 38%"></div>
+                                </div>
+                                <small class="text-muted">38% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fas fa-cogs fa-3x text-info"></i>
+                                </div>
+                                <h5>phpMyAdmin</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-info" style="width: 42%"></div>
+                                </div>
+                                <small class="text-muted">42% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="text-center mb-4">
+                    <i class="fas fa-tools text-warning"></i> Herramientas & Otros
+                </h2>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fab fa-git-alt fa-3x text-danger"></i>
+                                </div>
+                                <h5>Git</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-danger" style="width: 75%"></div>
+                                </div>
+                                <small class="text-muted">75% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fab fa-github fa-3x text-dark"></i>
+                                </div>
+                                <h5>GitHub</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-dark" style="width: 75%"></div>
+                                </div>
+                                <small class="text-muted">75% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="tech-card card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="tech-icon mb-3">
+                                    <i class="fas fa-code fa-3x text-primary"></i>
+                                </div>
+                                <h5>VS Code</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-primary" style="width: 95%"></div>
+                                </div>
+                                <small class="text-muted">95% de dominio</small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Certificaciones -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">Objetivos & Aprendizaje</h2>
+                <p class="lead text-muted">En lo que estoy trabajando y mis próximos pasos</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="certificate-card card shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="certificate-icon mb-3">
+                            <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                        </div>
+                        <h5>Profundizando en Django</h5>
+                        <p class="text-muted">Mejorando habilidades en desarrollo web</p>
+                        <span class="badge bg-primary">En Progreso</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="certificate-card card shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="certificate-icon mb-3">
+                            <i class="fas fa-gamepad fa-3x text-success"></i>
+                        </div>
+                        <h5>Game Development</h5>
+                        <p class="text-muted">Explorando desarrollo de videojuegos</p>
+                        <span class="badge bg-success">Objetivo 2025</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="certificate-card card shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="certificate-icon mb-3">
+                            <i class="fas fa-rocket fa-3x text-warning"></i>
+                        </div>
+                        <h5>Crecimiento Profesional</h5>
+                        <p class="text-muted">Evolución hacia roles más senior</p>
+                        <span class="badge bg-warning">Meta a Largo Plazo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.tech-card {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.tech-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.tech-icon i,
+.tech-logo {
+    transition: transform 0.3s ease;
+}
+
+.tech-card:hover .tech-icon i,
+.tech-card:hover .tech-logo {
+    transform: scale(1.2);
+}
+
+.certificate-card {
+    transition: all 0.3s ease;
+}
+
+.certificate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.certificate-icon i {
+    transition: transform 0.3s ease;
+}
+
+.certificate-card:hover .certificate-icon i {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.category-section {
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .tech-card,
+    .certificate-card {
+        margin-bottom: 20px;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,289 @@
+{% extends 'portfolio/base.html' %}
+{% load portfolio_extras %}
+
+{% block title %}Proyectos - Portfolio Profesional{% endblock %}
+
+{% block content %}
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h1 class="display-4 fw-bold">Mis Proyectos</h1>
+                <p class="lead text-muted">Una colección de mis trabajos profesionales y personales más destacados</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm project-card">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" 
+                             style="height: 250px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" 
+                             style="height: 250px; background: linear-gradient(45deg, #667eea, #764ba2);">
+                            <i class="fas fa-code text-white fa-4x"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text flex-grow-1">{{ project.description|truncatewords:25 }}</p>
+                        
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-2">
+                                <i class="fas fa-calendar-alt"></i> {{ project.date_created|date:"M Y" }}
+                            </small>
+                            <div class="technologies-tags">
+                                {% for tech in project.technologies|split:"," %}
+                                    <span class="badge bg-primary me-1 mb-1">{{ tech|strip }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div class="card-actions d-flex gap-2">
+                            <a href="{% url 'portfolio:project_detail' project.id %}" 
+                               class="btn btn-outline-primary btn-sm flex-fill">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </a>
+                            {% if project.url %}
+                                <a href="{{ project.url }}" target="_blank" 
+                                   class="btn btn-primary btn-sm">
+                                    <i class="fas fa-external-link-alt"></i> Demo
+                                </a>
+                            {% endif %}
+                            {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" 
+                                   class="btn btn-dark btn-sm">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    {% if project.featured %}
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <span class="badge bg-warning text-dark">
+                                <i class="fas fa-star"></i> Destacado
+                            </span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <!-- Proyecto destacado cuando no hay proyectos en la BD -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm project-card">
+                    <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" 
+                         style="height: 250px; background: linear-gradient(45deg, #667eea, #764ba2);">
+                        <i class="fas fa-gamepad text-white fa-4x"></i>
+                    </div>
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Portfolio Personal Gaming</h5>
+                        <p class="card-text flex-grow-1">
+                            Mi portfolio personal web desarrollado con tecnologías modernas, enfocado en mostrar mis habilidades 
+                            como desarrollador junior y mi pasión por los videojuegos.
+                        </p>
+                        
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-2">
+                                <i class="fas fa-calendar-alt"></i> Oct 2024
+                            </small>
+                            <div class="technologies-tags">
+                                <span class="badge bg-primary me-1 mb-1">HTML</span>
+                                <span class="badge bg-primary me-1 mb-1">CSS</span>
+                                <span class="badge bg-primary me-1 mb-1">JavaScript</span>
+                                <span class="badge bg-success me-1 mb-1">Django</span>
+                                <span class="badge bg-info me-1 mb-1">Bootstrap</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-actions d-flex gap-2">
+                            <a href="https://gonzalocapel-ce8c4.wasmer.app/" 
+                               target="_blank" 
+                               class="btn btn-primary btn-sm flex-fill">
+                                <i class="fas fa-external-link-alt"></i> Ver Proyecto
+                            </a>
+                            <a href="#" 
+                               class="btn btn-outline-secondary btn-sm">
+                                <i class="fab fa-github"></i> Código
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Segundo proyecto de ejemplo -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm project-card">
+                    <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" 
+                         style="height: 250px; background: linear-gradient(45deg, #28a745, #20c997);">
+                        <i class="fas fa-code text-white fa-4x"></i>
+                    </div>
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Proyecto Django Learning</h5>
+                        <p class="card-text flex-grow-1">
+                            Aplicación web desarrollada durante mi aprendizaje de Django, implementando funcionalidades 
+                            CRUD y autenticación de usuarios.
+                        </p>
+                        
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-2">
+                                <i class="fas fa-calendar-alt"></i> Sep 2024
+                            </small>
+                            <div class="technologies-tags">
+                                <span class="badge bg-success me-1 mb-1">Django</span>
+                                <span class="badge bg-primary me-1 mb-1">Python</span>
+                                <span class="badge bg-info me-1 mb-1">SQLite</span>
+                                <span class="badge bg-warning me-1 mb-1">JavaScript</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-actions d-flex gap-2">
+                            <span class="btn btn-outline-muted btn-sm flex-fill disabled">
+                                <i class="fas fa-clock"></i> En Desarrollo
+                            </span>
+                            <a href="#" 
+                               class="btn btn-outline-secondary btn-sm">
+                                <i class="fab fa-github"></i> Código
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tercer proyecto de ejemplo -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm project-card">
+                    <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" 
+                         style="height: 250px; background: linear-gradient(45deg, #ffc107, #fd7e14);">
+                        <i class="fas fa-mobile-alt text-white fa-4x"></i>
+                    </div>
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">App Móvil Concept</h5>
+                        <p class="card-text flex-grow-1">
+                            Concepto de aplicación móvil desarrollado como ejercicio de aprendizaje, 
+                            explorando interfaces responsive y UX design.
+                        </p>
+                        
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-2">
+                                <i class="fas fa-calendar-alt"></i> Ago 2024
+                            </small>
+                            <div class="technologies-tags">
+                                <span class="badge bg-warning me-1 mb-1">HTML</span>
+                                <span class="badge bg-info me-1 mb-1">CSS</span>
+                                <span class="badge bg-success me-1 mb-1">Bootstrap</span>
+                                <span class="badge bg-primary me-1 mb-1">JavaScript</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-actions d-flex gap-2">
+                            <span class="btn btn-outline-muted btn-sm flex-fill disabled">
+                                <i class="fas fa-eye-slash"></i> Prototipo
+                            </span>
+                            <span class="btn btn-outline-secondary btn-sm disabled">
+                                <i class="fas fa-lock"></i> Privado
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Paginación -->
+        {% if projects.has_other_pages %}
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="Navegación de proyectos" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if projects.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">Primera</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ projects.previous_page_number }}">Anterior</a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for num in projects.paginator.page_range %}
+                            {% if projects.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% elif num > projects.number|add:'-3' and num < projects.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if projects.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ projects.next_page_number }}">Siguiente</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ projects.paginator.num_pages }}">Última</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-6 fw-bold mb-4">¿Te gusta lo que ves?</h2>
+                <p class="lead mb-4">
+                    Estos son solo algunos ejemplos de mi trabajo. Si tienes un proyecto en mente,
+                    me encantaría escuchar sobre él.
+                </p>
+                <a href="{% url 'portfolio:contact' %}" class="btn btn-warning btn-lg me-3">
+                    <i class="fas fa-envelope"></i> Contactar
+                </a>
+                <a href="{% url 'portfolio:services' %}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-tools"></i> Ver Servicios
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.technologies-tags .badge {
+    font-size: 0.7rem;
+}
+
+.card-actions .btn {
+    font-size: 0.8rem;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2) !important;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,225 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Inicio - Portfolio Profesional{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-primary text-white d-flex align-items-center" style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">
+                    Hola, soy <span class="text-warning typing-text">Gonzalo</span>
+                </h1>
+                <h2 class="h4 mb-4">Junior Full Stack Developer</h2>
+                <p class="lead mb-4">
+                    Desarrollador junior apasionado por la tecnología y los videojuegos. Con 1 año de experiencia creando 
+                    aplicaciones web con Python, Django y JavaScript. Siempre dispuesto a aprender y enfrentar nuevos desafíos.
+                </p>
+                <div class="hero-buttons position-relative" style="z-index: 10;">
+                    <a href="{% url 'portfolio:projects' %}" class="btn btn-warning btn-lg me-3">
+                        <i class="fas fa-folder-open"></i> Ver Proyectos
+                    </a>
+                    <a href="{% url 'portfolio:contact' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-envelope"></i> Contactar
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://via.placeholder.com/400x400/667eea/ffffff?text=Gonzalo" 
+                     alt="Foto de perfil" class="img-fluid rounded-circle shadow-lg" style="max-width: 300px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Proyectos Destacados -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">Proyectos Destacados</h2>
+                <p class="lead text-muted">Algunos de mis trabajos más recientes y relevantes</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for project in featured_projects %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-primary d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <i class="fas fa-code text-white fa-3x"></i>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-tools"></i> {{ project.technologies }}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="{% url 'portfolio:project_detail' project.id %}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                        {% if project.url %}
+                            <a href="{{ project.url }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Proyecto destacado principal -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-img-top bg-primary d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(45deg, #667eea, #764ba2);">
+                        <i class="fas fa-gamepad text-white fa-3x"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Portfolio Gaming</h5>
+                        <p class="card-text">Mi portfolio personal desarrollado con Django, mostrando mis habilidades y pasión por los videojuegos.</p>
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-tools"></i> Django, HTML, CSS, JavaScript, Bootstrap
+                            </small>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="{% url 'portfolio:projects' %}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                        <a href="https://gonzalocapel-ce8c4.wasmer.app/" target="_blank" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-external-link-alt"></i> Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Placeholder para futuros proyectos -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm border-2 border-dashed">
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <i class="fas fa-plus fa-3x text-muted"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-muted">Próximo Proyecto</h5>
+                        <p class="card-text text-muted">Trabajando en nuevas ideas y conceptos emocionantes.</p>
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-clock"></i> Coming Soon...
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="{% url 'portfolio:projects' %}" class="btn btn-outline-primary btn-lg">
+                    Ver Todos los Proyectos <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Habilidades -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">Habilidades Técnicas</h2>
+                <p class="lead text-muted">Tecnologías y herramientas que domino</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for skill in skills %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="text-center">
+                    {% if skill.logo %}
+                        <img src="{{ skill.logo.url }}" alt="{{ skill.name }}" class="mb-3" style="height: 60px;">
+                    {% else %}
+                        <i class="fas fa-code fa-3x text-primary mb-3"></i>
+                    {% endif %}
+                    <h6>{{ skill.name }}</h6>
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar" role="progressbar" style="width: {{ skill.proficiency }}%" 
+                             aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    <small class="text-muted">{{ skill.proficiency }}%</small>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No hay habilidades registradas aún.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Testimonios -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">Lo que dicen mis clientes</h2>
+                <p class="lead text-muted">Testimonios de personas que han trabajado conmigo</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for testimonial in testimonials %}
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        {% if testimonial.image %}
+                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" 
+                                 class="rounded-circle mb-3" style="width: 80px; height: 80px; object-fit: cover;">
+                        {% else %}
+                            <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 80px; height: 80px;">
+                                <i class="fas fa-user fa-2x"></i>
+                            </div>
+                        {% endif %}
+                        <blockquote class="blockquote">
+                            <p>"{{ testimonial.content|truncatewords:25 }}"</p>
+                        </blockquote>
+                        <footer class="blockquote-footer">
+                            <cite title="Source Title">
+                                <strong>{{ testimonial.name }}</strong><br>
+                                <small class="text-muted">{{ testimonial.position }} en {{ testimonial.company }}</small>
+                            </cite>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No hay testimonios disponibles aún.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">¿Tienes un proyecto en mente?</h2>
+                <p class="lead mb-4">
+                    Estoy siempre abierto a discutir nuevas oportunidades y proyectos interesantes.
+                </p>
+                <a href="{% url 'portfolio:contact' %}" class="btn btn-warning btn-lg">
+                    <i class="fas fa-paper-plane"></i> Hablemos
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
