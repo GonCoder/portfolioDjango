@@ -341,7 +341,7 @@ Accede al panel en: `http://127.0.0.1:8000/admin/`
 ## 📱 Capturas de Pantalla
 
 ### Página de Inicio
-![Página de Inicio](screenshots/home.png)
+![Página de Inicio](screenshots/codigoEmmetDjango.png)
 *Landing page con hero section, proyectos destacados y habilidades*
 
 ### Página de Proyectos
@@ -466,15 +466,6 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 - **Font Awesome** por los iconos
 - **Google Fonts** por las tipografías
 - **Comunidad Django** por la documentación y recursos
-
-## 📞 Contacto
-
-**Gonzalo**
-- Email: gonzalo@email.com
-- LinkedIn: [gonzalo-linkedin](https://linkedin.com/in/gonzalo)
-- GitHub: [gonzalo-github](https://github.com/gonzalo)
-- Portfolio: [gonzalo-portfolio.com](https://gonzalo-portfolio.com)
-
 ---
 
 ⭐ **¡No olvides darle una estrella al repositorio si te ha sido útil!** ⭐
