@@ -203,6 +203,11 @@ section {
 }
 
 /* Forms */
+.form-label {
+    color: #212529 !important; /* Ensure high contrast for form labels */
+    font-weight: 500; /* Make labels slightly bolder */
+}
+
 .form-control {
     border-radius: 8px;
     border: 2px solid var(--border-color);

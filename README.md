@@ -341,7 +341,7 @@ Accede al panel en: `http://127.0.0.1:8000/admin/`
 ## 📱 Capturas de Pantalla
 
 ### Página de Inicio
-![Página de Inicio](screenshots/codigoEmmetDjango.png)
+![Página de Inicio](screenshots/inicio.png)
 *Landing page con hero section, proyectos destacados y habilidades*
 
 ### Página de Proyectos
